@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
+:root {
+  --primary: #ff3131;
+  --base: #050000;
+  overflow-x: hidden;
+}
+
+@font-face {
+  font-family: "oswald";
+  src: url("/fonts/oswald.bold.ttf") format("truetype");
+}
+
+.__intro__ {
+  font-family: "oswald", sans-serif;
+  font-weight: 700;
+}
+
+.__nav_menu__ li {
+  display: flex;
+  flex-direction: column;
+  position: relative; /* anchor for ::after */
+}
+
+.__nav_items__ li::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  transform: translateX(-50%) scaleX(0);
+  left: 50%;
+  width: 20px;
+  height: 3px;
+  background-color: var(--primary);
+  border-radius: 4px;
+  transition: transform 0.25s ease;
+}
+
+.__nav_menu__ li:hover::after,
+.__nav_menu__ li.active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.__v_arrow__ {
+  animation: move 1s infinite ease-in-out alternate;
+  animation-duration: 1000ms;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateY(-2px);
+  }
+}
