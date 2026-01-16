@@ -26,8 +26,8 @@ export default function HomeLayout() {
             based in Metro Manila.
           </p>
         </section>
-        <section className="__View_Collection_BTN__ bg-white/20  shadow-lg shadow-red-900/40 pl-5 pr-4 py-3 rounded-lg border-1 border-white/15 w-fit flex text-white items-center gap-3">
-          <button className=" font-[oswald] text-sm md:text-base uppercase ">
+        <section className="__View_Collection_BTN__  bg-[var(--base)] shadow-[inset_0_4px_4px_rgba(0,0,0,0.5)] pl-5 pr-4 py-3 rounded-lg border-1 border-white/15 w-fit flex text-white items-center gap-3">
+          <button className=" font-[oswald] text-xs md:text-base uppercase ">
             View Collection
           </button>
           <MdArrowOutward className="__v_arrow__ text-2xl " />

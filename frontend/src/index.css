@@ -4,6 +4,7 @@
 :root {
   --primary: #ff3131;
   --base: #050000;
+  --secondary: #101010;
   overflow-x: hidden;
 }
 
@@ -46,11 +47,15 @@
   animation-duration: 1000ms;
 }
 
+.__navbar__ .open::before {
+  content: "";
+}
+
 @keyframes move {
   0% {
     transform: translateX(-2px);
   }
   100% {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
   }
 }
