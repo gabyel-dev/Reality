@@ -2,37 +2,40 @@ import { useEffect, useState } from "react";
 import { CgMenuGridR } from "react-icons/cg";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineClose } from "react-icons/md";
-import { useWindowSize } from "react-use";
 import NavbarMobile from "./navbar_mobile";
 import NavbarDesktop from "./navbar_desktop";
+import useBreakpoint from "../../utility/useWidth";
+import useCloseOnScroll from "../../utility/useHideOnScroll_NAV";
+import { scrollToSection } from "../../utility/scrollTo";
 
-export default function NavBar() {
+export default function NavBar({ isOpenD, setIsOpenD }) {
   const [isActive, setIsActive] = useState("Home");
   const [isOpenM, setIsOpenM] = useState(false);
-  const [isOpenD, setIsOpenD] = useState(false);
-  const { width } = useWindowSize();
+  const { isMobile, isDesktop } = useBreakpoint();
+
+  useCloseOnScroll(setIsOpenD);
 
   useEffect(() => {
-    if (width >= 768) {
-      setIsOpenM(false);
-    }
-  }, [width]);
+    if (isMobile) setIsOpenM(false);
+  }, [isMobile]);
+
   useEffect(() => {
-    if (width <= 768) {
-      setIsOpenD(false);
-    }
-  }, [width]);
+    if (isDesktop) setIsOpenD(false);
+  }, [isDesktop]);
 
   return (
-    <div className="__navbar__ relative z-4 w-full bg-[var(--base)] flex items-center justify-between border-b-1 border-white/15">
+    <div className="__navbar__ z-[1000] relative  w-full bg-[var(--base)] flex items-center justify-between border-b-1 border-white/15">
       <section className="__nav_logo__ md:w-30 md:h-30  w-26 h-26 bg-white cursor-pointer">
         <img src="/reality_prod_white.png" alt="" />
       </section>
       <section className="__nav_menu__">
-        <ul className="__nav_items__ md:flex md:block hidden md:gap-14  lg:gap-20 text-white">
+        <ul className="__nav_items__ font-[oswald-regular] md:flex md:block hidden md:gap-14  lg:gap-20 text-white">
           <li
             className={`cursor-pointer ${isActive === "Home" ? "active" : ""}`}
-            onClick={() => setIsActive("Home")}
+            onClick={() => {
+              setIsActive("Home");
+              scrollToSection("home");
+            }}
           >
             Home
           </li>
@@ -59,7 +62,7 @@ export default function NavBar() {
         </ul>
       </section>
       <section className="__nav_menu md:w-30 md:h-30 w-26 h-26 bg-white flex items-center justify-center cursor-pointer">
-        {width > 768 ? (
+        {isDesktop ? (
           <section
             onClick={() => setIsOpenD((prev) => !prev)}
             className="cursor-pointer"
@@ -109,10 +112,8 @@ export default function NavBar() {
         )}
       </section>
 
-      {width < 768 && <NavbarMobile isOpen={isOpenM} />}
-      {width > 768 && (
-        <NavbarDesktop isOpen={isOpenD} setIsOpenD={setIsOpenD} />
-      )}
+      {isMobile && <NavbarMobile isOpen={isOpenM} />}
+      {isDesktop && <NavbarDesktop isOpen={isOpenD} setIsOpenD={setIsOpenD} />}
     </div>
   );
 }

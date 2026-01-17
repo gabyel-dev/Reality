@@ -13,6 +13,11 @@
   src: url("/fonts/oswald.bold.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "oswald-regular";
+  src: url("/fonts/oswald.regular.ttf") format("truetype");
+}
+
 .__intro__ {
   font-family: "oswald", sans-serif;
   font-weight: 700;
